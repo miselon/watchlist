@@ -1,10 +1,12 @@
 package service.impl;
 
+import service.MovieServiceQuery;
+
 import java.util.LinkedList;
 import java.util.List;
 
 // Zapytanie do API OMDB
-public class OMBDQuery {
+public class OMDBQuery implements MovieServiceQuery {
 
     private String apiKey;
     private OMDBSearchType OMDBSearchType;
@@ -15,10 +17,10 @@ public class OMBDQuery {
 
     // Prywatny konstruktor
     // Zapytanie można stworzyć tylko poprzez buildera
-    private OMBDQuery() {
+    private OMDBQuery() {
     }
 
-    // Static factory method buildera (by się ładniej budowało)
+    // Static factory method (by się ładniej budowało)
     public static Builder builder() {
         return new Builder();
     }
@@ -42,6 +44,7 @@ public class OMBDQuery {
 
         public Builder search(OMDBSearchType type, String value) {
             this.OMDBSearchType = type;
+            value = value.replace(' ', '+');
             this.searchValue = value;
             this.query.append(type.getValue()).append(value);
             return this;
@@ -59,7 +62,7 @@ public class OMBDQuery {
             return this;
         }
 
-        public OMBDQuery build() {
+        public OMDBQuery build() {
 
             if(this.apiKey == null)
                 throw new IllegalStateException("No API key.");
@@ -68,13 +71,15 @@ public class OMBDQuery {
 
             this.query.setCharAt(0, '?');
 
-            OMBDQuery queryObj = new OMBDQuery();
+            OMDBQuery queryObj = new OMDBQuery();
             queryObj.apiKey = this.apiKey;
             queryObj.OMDBSearchType = this.OMDBSearchType;
             queryObj.searchValue = this.searchValue;
             queryObj.year = this.year;
             queryObj.parameters = this.parameters;
             queryObj.queryURL = this.DOMAIN + this.query.toString();
+
+            //System.out.println("Query builder output: " + queryObj.queryURL);
 
             return queryObj;
         }

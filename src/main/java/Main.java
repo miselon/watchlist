@@ -1,31 +1,28 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.FullEntry;
-import service.impl.OMBDQuery;
-import service.impl.OMDBMovieServiceImpl;
-import service.impl.OMDBQueryParameter;
-import service.impl.OMDBSearchType;
 
-public class Main {
 
+public class Main extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                Main.class.getResource("view/AppView.fxml"));
+        Pane page = fxmlLoader.load();
+        Scene scene = new Scene(page);
+        stage.setTitle("Watchlist v1.0");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
     public static void main(String[] args) {
-
-        OMBDQuery q = OMBDQuery
-                .builder()
-                .apiKey("634c4692")
-                .search(OMDBSearchType.TITLE, "batman")
-                .param(OMDBQueryParameter.PLOT_FULL)
-                .build();
-
-        OMDBMovieServiceImpl ms = new OMDBMovieServiceImpl();
-        FullEntry fe = (FullEntry) ms.sendQuery(q);
-
-        System.out.println(fe.getPlot());
-        System.out.println(fe.getResponse());
-
+        launch(args);
     }
 
 }

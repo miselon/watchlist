@@ -3,6 +3,7 @@ package service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import service.MovieService;
+import service.MovieServiceQuery;
 import utill.exceptions.MovieServiceException;
 import model.FullEntry;
 import model.Response;
@@ -21,17 +22,21 @@ public class OMDBMovieServiceImpl implements MovieService {
     }
 
     // Wysyłanie zapytania do API
-    public Response sendQuery(OMBDQuery query) throws MovieServiceException {
+    public Response sendQuery(MovieServiceQuery query) throws MovieServiceException {
 
+        OMDBQuery tempQuery = (OMDBQuery) query;
         HttpURLConnection connection = null;
         URL url;
 
+        System.out.println("Sending OMDB query: " + tempQuery.getQueryURL());
+
         try {
             // Konfiguracja połączenia
-            url = new URL(query.getQueryURL());
+            url = new URL(tempQuery.getQueryURL());
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
             // Wyrzuca MovieServiceException przy złej odpowiedzi HTTP
             if(connection.getResponseCode() != 200)
@@ -40,11 +45,11 @@ public class OMDBMovieServiceImpl implements MovieService {
             Response ret;
 
             // Zwraca SearchResult
-            if(query.getOMDBSearchType().equals(OMDBSearchType.SEARCH))
+            if(tempQuery.getOMDBSearchType().equals(OMDBSearchType.SEARCH))
                         ret = this.objectMapper.readValue(connection.getInputStream(), SearchResult.class);
             // Zwraca FullEntry
-            else if(query.getOMDBSearchType().equals(OMDBSearchType.TITLE) ||
-                    query.getOMDBSearchType().equals(OMDBSearchType.ID))
+            else if(tempQuery.getOMDBSearchType().equals(OMDBSearchType.TITLE) ||
+                    tempQuery.getOMDBSearchType().equals(OMDBSearchType.ID))
                         ret = this.objectMapper.readValue(connection.getInputStream(), FullEntry.class);
 
             // W razie gdyby coś poszło nie tak

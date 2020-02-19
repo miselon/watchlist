@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0"
+      xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppViewController">
+   <children>
+      <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="770.0" prefWidth="372.0">
+         <children>
+            <Rectangle fx:id="sideBg" arcHeight="5.0" arcWidth="5.0" fill="#d3d3d3" height="770.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="372.0" />
+            <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="278.0" />
+            <Button fx:id="searchButton" layoutX="292.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="62.0" text="Search" />
+            <TableView fx:id="searchResultTable" layoutX="14.0" layoutY="60.0" prefHeight="700.0" prefWidth="340.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="mainPane" layoutX="398.0" layoutY="14.0" prefHeight="770.0" prefWidth="788.0">
+         <children>
+            <Rectangle fx:id="mainBg" arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="770.0" layoutX="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="788.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="528.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="372.0" />
+            <ImageView fx:id="posterHolder" fitHeight="528.0" fitWidth="372.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="title" fill="#282828" layoutX="402.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="372.0">
+               <font>
+                  <Font name="Arial Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="pgRating" fill="#282828" layoutX="402.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="77.0">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="runtime" fill="#282828" layoutX="14.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="77.0">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="imdbRating" fill="#282828" layoutX="402.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="246.0">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="metascoreRating" fill="#282828" layoutX="402.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="246.0">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="director" fill="#282828" layoutX="402.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="372.0">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="plot" fill="#282828" layoutX="402.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="JUSTIFY" wrappingWidth="372.0">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="starring" fill="#282828" layoutX="402.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="372.0">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</Pane>
