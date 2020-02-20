@@ -1,9 +1,0 @@
-utill\exceptions\MovieServiceException.class
-Main.class
-model\Entry.class
-model\enums\QueryParameter.class
-model\Response.class
-model\SearchResult.class
-model\Rating.class
-model\FullEntry.class
-service\MovieService.class
